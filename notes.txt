@@ -1,0 +1,23 @@
+Commands :
+
+i r $eip $esp $ebp
+x/32xw $esp
+x/32xw 0xADDRESS
+info frame
+info proc mappings
+
+
+Current level :
+
+HEAP ADDRESS :  0x8049000
+STRDUP RETURN : 0x804a008
+
+esp : 0xbffff6b0
+start : 0xbffff6cc
+ebp : 0xbffff728
+eip : 0xbffff72c
+
+eip - start = 80
+
+   80 bytes + 4 bytes eip
+=> 35 NOP + 45 byte shellcode + 4 bytes eip
