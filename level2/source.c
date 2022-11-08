@@ -1,23 +1,19 @@
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 
-
-void	p()
+void p (void)
 {
-	char	*s;
+	char s[72];
 
-	fflush();
 	gets(s);
-	if (s & 0xb0000000) {
+	if ((unsigned int)s & 0xb0000000) {
 		printf(s);
-		exit();
+		exit(1);
 	}
 	puts(s);
 	strdup(s);
-	system("/bin/sh");
-
 }
-
 
 int	main(int argc, char **argv)
 {

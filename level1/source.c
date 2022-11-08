@@ -9,6 +9,6 @@ void run (void)
 
 int main (void)
 {
-    char *s;
+    char s[64];
     gets(s);
 }
