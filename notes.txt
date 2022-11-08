@@ -5,19 +5,22 @@ x/32xw $esp
 x/32xw 0xADDRESS
 info frame
 info proc mappings
+info variables
 
 
 Current level :
 
-HEAP ADDRESS :  0x8049000
-STRDUP RETURN : 0x804a008
+m address : 0x08049810 
+m address formatted : \x10\x98\x04\x08
 
-esp : 0xbffff6b0
-start : 0xbffff6cc
-ebp : 0xbffff728
-eip : 0xbffff72c
+x/136xw $esp
 
-eip - start = 80
+esp : 0xbffff500
+start : 0xbffff510
+ebp : 0xbffff718
+eip : 0xbffff728
 
-   80 bytes + 4 bytes eip
-=> 35 NOP + 45 byte shellcode + 4 bytes eip
+eip - start = 
+
+    bytes + 4 bytes eip
+=>  NOP +  byte shellcode + 4 bytes eip

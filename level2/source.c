@@ -15,7 +15,7 @@ void p (void)
 	strdup(s);
 }
 
-int	main(int argc, char **argv)
+int	main (void)
 {
 	p();
 	return 0;
