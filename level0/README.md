@@ -30,6 +30,8 @@ jne     0x8048f58
 
 A call to `atoi()`, followed by a comparison to the number `423`, and a conditional jump (`jne` standing for *Jump if Not-Equal*). It's clear the program expects that number as first argument.
 
+## The exploit
+
 We try :
 
 ```
@@ -37,6 +39,8 @@ We try :
 ```
 
 It works ! The executable enters an interactive, privileged shell-like `execve` loop, prompting us with `$ `.
+
+## The flag
 
 We run :
 

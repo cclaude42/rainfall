@@ -12,6 +12,7 @@ class N {
         }
 };
 
+
 void main (int argc, char **argv)
 {
     void *s1;
