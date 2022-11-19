@@ -20,4 +20,3 @@ int	main (void)
 	p();
 	return 0;
 }
-

@@ -83,7 +83,7 @@ Finally, we have to pipe it into the executable. Same as before, we run :
 It works ! In our interactive shell, we run :
 
 ```
-cat /home/user/level2/.pass
+cat /home/user/level3/.pass
 ```
 
 ... and get the flag for `level2` :

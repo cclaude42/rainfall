@@ -22,7 +22,7 @@ The `%n` count doesn't reset, so we'll write the total in ascending order. We'll
 
 ## The address
 
-Cutter tells us the variable to .
+Cutter tells us the variable to change.
 
 Running `info variable` in `gdb` yields us `m`'s address : `0x08049810`.
 

