@@ -8,7 +8,7 @@ The `GOT` (Global Offset Table) holds the addresses of included functions ; by c
 
 The `n` function, called by `main`, runs `exit` at the end. We decide to replace `exit`'s GOT address with `o`.
 
-## The value
+## **The value**
 
 Cutter reveals the address of `o`, our spoofed value : `0x080484a4`.
 
@@ -18,7 +18,7 @@ This can be broken down in four :
 - `0x84` or `132`
 - `0xa4` or `164`
 
-## The address
+## **The address**
 
 Cutter's green bar at the top allows us to skim through the important part. At the end, we find `.got.plt` and go to it.
 
@@ -31,7 +31,7 @@ It reveals the address at which `exit` is referenced : `0x08049838`
 
 Fortunately, its value, `0x080483d6`, already shares two bytes with the value we want, `0x080484a4`. We'll just need to change bytes #3 and #4.
 
-## The buffer
+## **The buffer**
 
 Quick experimentation reveals the beginning of the buffer is at spot `%4$`.
 
@@ -39,7 +39,7 @@ Since our smallest `n` value is `132`, we can start with the addresses.
 
 We write `132` bytes, including our two addresses at places #4 and #6, our `%6$hhn`, `32` more bytes to get to `164`, and finally our `%4$hhn`.
 
-## The exploit
+## **The exploit**
 
 We turn that into something we can output in Python :
 
@@ -47,7 +47,7 @@ We turn that into something we can output in Python :
 python -c 'print("\x38\x98\x04\x08____\x39\x98\x04\x08________________________________________________________________________________________________________________________%6$hhn________________________________%4$hhn")'
 ```
 
-## The flag
+## **The flag**
 
 Now we just have to format this to send it to our executable :
 

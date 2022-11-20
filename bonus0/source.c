@@ -35,14 +35,13 @@ void pp(char *dest)
 }
 
 
-
 int main (void)
 {
-    char buffer [54];
+    char dest [54];
     
-    pp(buffer);
+    pp(dest);
 
-    puts(buffer);
+    puts(dest);
 
     return 0;
 }

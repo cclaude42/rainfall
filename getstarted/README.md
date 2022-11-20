@@ -1,6 +1,6 @@
 # Getting started
 
-## Setting up VirtualBox
+## **Setting up VirtualBox**
 
 In VirtualBox, go to `File > Host Network Manager`. If you see a `VirtualBox Host-Only Ethernet Adapter` listed, or a `vboxnet0`, you're set. Otherwise, make one using the `Create` button.
 
@@ -8,13 +8,13 @@ Create a new VM with `New`. Give it a name, select `Type: Linux` and `Version: U
 
 Select your new VM, click `Settings`, and go to `Network`. If it's not already done, enable `Enable Network Adapter`, select `Attached-to: Host-Only Adapter` and make sure `Name:` points to the network you made earlier (probably `VirtualBox Host-Only Ethernet Adapter` or `vboxnet0`)
 
-## Starting the VM
+## **Starting the VM**
 
 **Download the .iso file** from the [intranet's project page](https://projects.intra.42.fr/projects/42cursus-rainfall).
 
 Now, `Start` the VM. It'll prompt you for an image to boot from. Import the ISO with the folder button, select it, and start the VM.
 
-## Connecting
+## **Connecting**
 
 RainFall should now boot and display ASCII art, an IP address and prompt you for a login.
 

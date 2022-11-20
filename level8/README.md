@@ -7,13 +7,13 @@ The executable is an interactive loops with commands :
 - `service` runs `_service = strdup(servbuf)`
 - `login` runs `system("/bin/sh")` IF `_auth[8] != 0`
 
-## The allocation
+## **The allocation**
 
 `_auth` is an `int` table ; this means addresses are 4 bytes long, so `_auth[8]` is at `_auth + 32`.
 
 The mallocs are successive, meaning each new `auth ` or `service` will allocate a new address 16 bytes after the previous one.
 
-## The buffers
+## **The buffers**
 
 There are three successive buffers : `cmd[5]`, `authbuf[2]` and `servbuf[137]`.
 
@@ -27,9 +27,9 @@ authbuf : c  e
 servbuf : \n \0 \0 \0 ...
 ```
 
-This means, by the way, that running service automatically initializes its value to non-zero.
+This means, by the way, that running service automatically initializes its value to non-zero (since `serv = strdup(servbuf)` and `servbuf` contains a `\n`).
 
-## The exploit
+## **The exploit**
 
 We run **`auth `** : `_auth` is set to `0x804a008`. 
 
@@ -41,7 +41,7 @@ Now `_auth+32` (or `_auth[8]`) is `_service`, which is initialized to non-zero.
 
 We run **`login`** to get the interactive shell.
 
-## The flag
+## **The flag**
 
 It works ! In our interactive shell, we run :
 

@@ -6,7 +6,7 @@ We find an executable `level1`. We run `gdb level1` to examine it.
 
 What can we do here ? The run function we're looking for isn't naturally called by `main`. We'll have to use the `gets` to call `run`. Here's how we can do that :
 
-## The exploit
+## **The exploit**
 
 `gets` is famous for being vulnerable to buffer overflows. If you overwrite further than the buffer, you can overwrite certain parts of the stack. Here, we want to overwrite the **return address of the main function** : the `eip` register.
 
@@ -30,7 +30,7 @@ Finally, we have to pipe it into the executable. But there's an issue : when `sy
 ( python2 -c 'print("A" * 76 + "\x44\x84\x04\x08")' ; cat ) | ./level1
 ```
 
-## The flag
+## **The flag**
 
 The `python -c` overflows `gets`, `eip` is filled with the `run` address, `system("/bin/ls")` is ran and our `cat` is asked for a command. We run :
 

@@ -14,13 +14,13 @@ An `m` function prints `c`, which is what we want. We want to replace `puts`' ad
 
 To do this, we'll exploit the `strcpy` calls again.
 
-## The value
+## **The value**
 
 Cutter reveals the address of `m`, our spoofed value : `0x080484f4`.
 
 Formatted, this is `\xf4\x84\x04\x08`.
 
-## The addresses 
+## **The addresses**
 
 By running the executable in `gdb`, breaking after the `malloc`s and running `p/x $eax`, we get the addresses :
 
@@ -55,7 +55,7 @@ Let's fill the memory with what's in memory at runtime :
  p2[0]        p2[1] -------------------------------> var2
 ```
 
-## The exploit
+## **The exploit**
 
 Here's what we can do :
 - Exploit the first `strcpy` to overwrite `p2[1]`
@@ -97,7 +97,7 @@ Now, we can use `argv[2]` to put the `m` function's value in the GOT table and t
 
 Now, the executable should run `m()` when trying to run `puts()`.
 
-## The command
+## **The command**
 
 To recap, we need :
 
@@ -119,7 +119,7 @@ We run :
 ./level7 $(python -c 'print("A" * 20 + "\x28\x99\x04\x08")') $(python -c 'print("\xf4\x84\x04\x08")')
 ```
 
-## The flag
+## **The flag**
 
 It works ! We get the `level7` flag :
 

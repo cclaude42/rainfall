@@ -12,13 +12,13 @@ It's simple : we'll need to replace `var_two`'s value, `m`, with `n`, a function
 
 To do this, we'll exploit the `strcpy`, on the heap this time.
 
-## The value
+## **The value**
 
 Cutter reveals the address of `n`, our spoofed value : `0x08048454`.
 
 Formatted, this is `\x54\x84\x04\x08`.
 
-## The addresses
+## **The addresses**
 
 By running the executable in `gdb`, breaking after the `malloc`s and running `p/x $eax`, we get the addresses :
 
@@ -27,7 +27,7 @@ By running the executable in `gdb`, breaking after the `malloc`s and running `p/
 
 `0x50 - 0x08 = 0x48 = 72`, so we'll need to write 72 characters after the beginning of `var_one`
 
-## The exploit
+## **The exploit**
 
 We can do this fairly simply ; any buffer of `76+` characters will force `strcpy` to overwrite `var_two`. We run :
 
@@ -35,7 +35,7 @@ We can do this fairly simply ; any buffer of `76+` characters will force `strcpy
 ./level6 $(python -c 'print("A" * 72 + "\x54\x84\x04\x08")')
 ```
 
-## The flag
+## **The flag**
 
 It works ! We get the `level6` flag :
 

