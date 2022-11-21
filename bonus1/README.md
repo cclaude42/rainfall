@@ -17,15 +17,14 @@ We can use negative numbers to pass the check, and then take advantage of int ov
 
 For our `memcpy`, we'd like `n * 4 == 44`.
 
-We can use the following logic : if you add `UNSIGNED_INT_MAX+1` to our number, it'll stay unchanged. So we have :
+We can use the following logic : if you subtract `UNSIGNED_INT_MAX+1` to our number, it'll stay unchanged, because it'll loop. So we have :
 
 ```
     n * 4 = 44
-<=> n * 4 + UNSIGNED_INT_MAX+1 = 44
-<=> n * 4 = - UNSIGNED_INT_MAX+1 + 44
-<=> n * 4 = -4294967296 + 44
+<=> n * 4 = 44 - UNSIGNED_INT_MAX+1
+<=> n * 4 = 44 - 4294967296
 <=> n * 4 = -4294967252
-<=> n * 4 = -1073741813
+<=> n = -1073741813
 ```
 
 In C, `-1073741813 * 4` equals `44`.
